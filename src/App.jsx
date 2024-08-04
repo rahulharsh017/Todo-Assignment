@@ -1,28 +1,26 @@
-
-import React, { useState, useEffect } from 'react';
+// src/App.js
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addTask, updateTask, markAsDone } from './store/taskReducer';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 import SearchBar from './components/SearchBar';
-import tasksData from './data/task.json';
 
 const App = () => {
-  const [tasks, setTasks] = useState([]);
+  const tasks = useSelector(state => state.tasks);
+  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    setTasks(tasksData);
-  }, []);
-
-  const addTask = (task) => {
-    setTasks([...tasks, { ...task, id: tasks.length + 1, timestamp: new Date().toISOString() }]);
+  const handleAddTask = (task) => {
+    dispatch(addTask(task));
   };
 
-  const updateTask = (updatedTask) => {
-    setTasks(tasks.map(task => (task.id === updatedTask.id ? updatedTask : task)));
+  const handleUpdateTask = (task) => {
+    dispatch(updateTask(task));
   };
 
-  const markAsDone = (id) => {
-    setTasks(tasks.map(task => (task.id === id ? { ...task, completed: !task.completed } : task)));
+  const handleMarkAsDone = (id) => {
+    dispatch(markAsDone(id));
   };
 
   const filteredTasks = tasks.filter(task =>
@@ -30,14 +28,14 @@ const App = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center items-center gap-4">
-      <h4 className='font-bold text-3xl'>Todo List</h4>
+    <div className="flex flex-col gap-3 justify-center items-center">
+      <h1 className='text-3xl font-bold'>Todo List</h1>
       <SearchBar setSearchTerm={setSearchTerm} />
-      <TodoForm addTask={addTask} />
+      <TodoForm addTask={handleAddTask} />
       <TodoList
         tasks={filteredTasks}
-        updateTask={updateTask}
-        markAsDone={markAsDone}
+        updateTask={handleUpdateTask}
+        markAsDone={handleMarkAsDone}
       />
     </div>
   );
