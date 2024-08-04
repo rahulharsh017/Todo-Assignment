@@ -1,0 +1,24 @@
+[
+    {
+      "id": 1,
+      "title": "Buy groceries",
+      "description": "Milk, Bread, Cheese",
+      "completed": false,
+      "timestamp": "2024-08-01T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Read a book",
+      "description": "The Great Gatsby",
+      "completed": false,
+      "timestamp": "2024-08-02T12:00:00Z"
+    },
+    {
+      "id": 3,
+      "title": "React To-Do",
+      "description": "Make a React To-Do App",
+      "completed": false,
+      "timestamp": "2024-08-03T12:00:00Z"
+    }
+  ]
+  
